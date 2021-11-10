@@ -12,12 +12,18 @@
 
 <body>
     <h1> BINGO! </h1>
-    <p> <em> Welcome to Bingo! Please select a difficulty and then generate numbers OR generate numbers without a card at all! Your selected difficulty
-        will determine how large your card number possibilities can be (If you don't select, you'll be defaulted to easy.
-        ! Don't worry, repeats ARE allowed ;)! Everytime you generate a number, your  'counter' will go up! When you press play again, 
-        the game will reset to that certain difficulty. When you see the number you generated on your board, click the number to mark it! If you marked by 
-        accident, click again to unmark.
-        Try to win BINGO (five diagonals or five in any direction) with the lowest counter! Good luck! </em>
+    <p> <em> Welcome to Bingo! 
+        <ul> Please select a difficulty and then generate numbers OR generate numbers without a card at all! Your selected difficulty
+        will determine how large your card number possibilities can be (If you don't select, you'll be defaulted to easy.</ul>
+        <ul>Everytime you generate a number, your  'counter' will go up!  </ul>
+        <ul>When you see the number you generated on your board, click the number to mark it! If you marked by 
+        accident, click again to unmark.</ul>
+
+        <h3> Additional: </h3>
+        <ul>Don't worry, repeats ARE allowed ;)! </ul>
+        <ul>you press play again, 
+        the game will reset to that certain difficulty.  </ul> 
+        Try to win BINGO (five diagonals or five in any direction) with the lowest counter! Keep track of how low you can complete BINGO! Good luck! </em>
     </p>
     <div id="header">
         <p> <strong>Difficulty</strong> </p>
@@ -54,8 +60,6 @@
             //function 2: count how many times button clicked
             document.getElementById('counter').innerHTML = "You have generated " + counts +" time(s).";
             counts++;
-
-            
             
         });
 
