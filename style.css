@@ -3,19 +3,21 @@ body {
     background-color: #EDE0D4;
     font-family: 'Dongle', sans-serif;    
     padding: 15px 20px;
-    font-size: 18px;
+    font-size: 25px;
 }
 
 h1 {
     font-size: 35px;
 }
 
-#header {
-    font-size: 20px;
-}
 
-p {
-    font-size: 20px;
+#bigTitle {
+    background-color: #DDB892;
+    display: flex;
+    justify-content: center;
+    font-size: 60px;
+    letter-spacing: 8px;
+
 }
 
 button {

@@ -10,149 +10,150 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
 
-    <title>BINGO</title>
+    <title>Play Bingo! </title>
 </head>
 
 <body>
-    <h1> BINGO! </h1>
+    <h1 id="bigTitle"> BINGO! </h1>
+    <br>
     <p> <em> <strong> Welcome to Bingo! </em></strong>
-    <ul>
+        <ul>
         <br>
         <strong><em> How to Play: </em> </strong>
-        <li> Please select a difficulty and then generate numbers OR generate numbers without a card at all! Your
-            selected difficulty
-            will determine how large your card number possibilities can be (If you don't select, you'll be defaulted
-            to easy.</li>
-        <li>Everytime you generate a number, your 'counter' will go up! </li>
-        <li>When you see the number you generated on your board, click the number to mark it! If you marked by
-            accident, click again to unmark.</li>
+            <li> Please select a difficulty and then generate numbers OR generate numbers without a card at all! Your
+                selected difficulty
+                will determine how large your card number possibilities can be (If you don't select, you'll be defaulted
+                to easy.</li>
+            <li>Everytime you generate a number, your 'counter' will go up! </li>
+            <li>When you see the number you generated on your board, click the number to mark it! If you marked by
+                accident, click again to unmark.</li>
 
-        <br>
-        <strong><em> Additional: </em> </strong>
-        <li>Don't worry, repeats ARE allowed ;)! </li>
-        <li>If ou press play again, the game will reset to that certain difficulty. </li>
-        <li>Try to win BINGO (five diagonals or five in any direction) with the lowest counter! Keep track of how low
-            you can complete BINGO by clicking the "Add Sccore" button. </li>
+            <br>
+            <strong><em> Additional: </em> </strong>
+            <li>Don't worry, repeats ARE allowed ;)! </li>
+            <li>If ou press play again, the game will reset to that certain difficulty. </li>
+            <li>Try to win BINGO (five diagonals or five in any direction) with the lowest counter! Keep track of how low
+                you can complete BINGO by clicking the "Add Sccore" button. </li>
 
-        <br>
-        <strong><em> FAQ: </em> </strong>
-        <li>"Can't I just <em> cheat</em>?" Well, yes you can, but is that fun? This is a singleplayer Bingo for fun.
-            Currently, there is no anti-cheat and is going off
-            an honor system. Even if you did cheat so you got bingo before the game stops, your score gets deleted when
-            you leave, <em> filthy cheater</em>.</li>
-        <li>"Is there a prize if I win?" Other than your beautiful smile and bragging rights, <strong>no</strong>.</li>
-        <li>"Why is this game so easy/confusing?" <strong> It's Bingo. </strong></li>
+            <br>
+            <strong><em> FAQ: </em> </strong>
+            <li>"Can't I just <em> cheat</em>?" Well, yes you can, but is that fun? This is a singleplayer Bingo for fun.
+                Currently, there is no anti-cheat and is going off
+                an honor system. Even if you did cheat so you got bingo before the game stops, your score gets deleted when
+                you leave, <em> filthy cheater</em>.</li>
+            <li>"Is there a prize if I win?" Other than your beautiful smile and bragging rights, <strong>no</strong>.</li>
+            <li>"Why is this game so easy/confusing?" <strong> It's Bingo. </strong></li>
+        </ul>
+        <em> Good luck and BINGO! <3 </em>
 
+    </p>
 
-    </ul>
-    <em> <strong> Good luck and BINGO! <3 </em></strong>
-
-        </p>
-        <div id="header">
-            <p> <strong>Difficulty</strong> </p>
+    <div id="header">
+        <!-- logic behind difficulties: higher the number, the less chance you have of getting a desirable number -->
+        <p> <strong>Difficulty</strong> </p>
             <input type="radio" id="Easy" name="difficulty" value=25> Easy - 25 <br>
             <input type="radio" id="Medium" name="difficulty" value=50> Medium - 50<br>
             <input type="radio" id="Hard" name="difficulty" value=100> Hard - 100<br>
-            <button class="play"> PLAY </button>
+        <button class="play"> PLAY </button>
 
-        </div>
+    </div>
 
-        <!-- generate numbers -->
-        <div id="generator">
-            <h1>Generate Numbers: </h1>
+    <!-- format scores -->
+    <div id="scoreBoard">
+        <h1>Past Scores</h1>
+            <ul class="scoreList"></ul>
+        <button class="score">Add current score</button>
+    </div>
+
+     <!-- generate numbers -->
+    <div id="generator">
+        <h1>Generate Numbers: </h1>
             <p id="listOfNum"> </p>
             <p id="counter"> </p>
-            <button class="generateBtn">Generate</button>
-        </div>
+        <button class="generateBtn">Generate</button>
+    </div>
 
-        <!-- format scores -->
-        <div id="scoreBoard">
-            <h1>Past Scores</h1>
-            <ul class="scoreList"></ul>
-            <button class="score">Add current score</button>
-        </div>
-
-        <div class="bingoGame"> </div>
+       
+    <!-- game -->
+    <div class="bingoGame"> </div>
         <div id="card">
-        </div>
+    </div>
 
-        <script>
+    <script>
+        let max = 25; //defaulted to easy
+        let min = 1; //no bingo of 0 
 
+        //generator
+        let counts = 1;
+        let button = document.querySelector(".generateBtn");
 
-            let max = 25;
-            let min = 1;
+        button.addEventListener("click", function () {
+            //function 1: display random number
+            document.getElementById('listOfNum').innerHTML = "Number: " + getRndInteger(max, min);
 
-            //generator
-            let counts = 1;
-            let button = document.querySelector(".generateBtn");
+            //function 2: count how many times button clicked
+            document.getElementById('counter').innerHTML = "You have generated " + counts + " time(s).";
+            counts++;
 
-            button.addEventListener("click", function () {
-                //function 1: display random number
-                document.getElementById('listOfNum').innerHTML = "Number: " + getRndInteger(max, min);
+        });
 
-                //function 2: count how many times button clicked
-                document.getElementById('counter').innerHTML = "You have generated " + counts + " time(s).";
-                counts++;
+        //generate numbers
+        function getRndInteger(max, min) {
+            console.log(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
 
-            });
+        //format score
+        let addScore = document.querySelector(".score");
+        addScore.addEventListener("click", addScoreFunction);
+        function addScoreFunction() {
+            let newScore = document.createElement("li");
+            newScore.textContent = counts - 1;
+            let scoreList = document.querySelector(".scoreList");
+            scoreList.appendChild(newScore);
+        }
 
-            //generate numbers
-            function getRndInteger(max, min) {
-                console.log(max);
-                return Math.floor(Math.random() * (max - min + 1)) + min;
-            }
+        //start game
+        let card = document.querySelector("#card");
+        let difficulty = document.querySelectorAll("input");
+        let title = document.querySelector(".bingoGame");
 
-            //format score
-            let addScore = document.querySelector(".score");
-            addScore.addEventListener("click", addScoreFunction);
-            function addScoreFunction() {
-                let newScore = document.createElement("li");
-                newScore.textContent = counts - 1;
-                let scoreList = document.querySelector(".scoreList");
-                scoreList.appendChild(newScore);
-            }
+        let play = document.querySelector(".play");
+        play.addEventListener("click", function () {
+            counts = 1; //reset counter to 1 if play is pressed again
+            document.getElementById('listOfNum').innerHTML = "N/A";
+            document.getElementById('counter').innerHTML = "You have not generated a number.";
+            card.innerHTML = "";
 
-            //start game
-            let card = document.querySelector("#card");
-            let difficulty = document.querySelectorAll("input");
-            let title = document.querySelector(".bingoGame");
+            title.innerHTML = "<h1> BINGO </h1>";
+            card.classList.add("addCardColor");
 
-            let play = document.querySelector(".play");
-            play.addEventListener("click", function () {
-                counts = 1; //reset counter to 1 if play is pressed again
-                document.getElementById('listOfNum').innerHTML = "N/A";
-                document.getElementById('counter').innerHTML = "You have not generated a number.";
-                card.innerHTML = "";
-
-                title.innerHTML = "<h1> BINGO </h1>";
-                card.classList.add("addCardColor");
-
-                for (var i = 0, length = difficulty.length; i < length; i++) {
-                    if (difficulty[i].checked) {
-                        max = difficulty[i].value;
-                        console.log(difficulty[i].value);
-                        break;
-                    }
+            for (var i = 0, length = difficulty.length; i < length; i++) {
+                if (difficulty[i].checked) {
+                    max = difficulty[i].value;
+                    console.log(difficulty[i].value);
+                    break;
                 }
-                for (i = 1; i <= 25; i++) {
-                    let numElm = document.createElement('p');
-                    card.appendChild(numElm);
-                    numElm.textContent = max;
-                    numElm.textContent = Math.floor(Math.random() * max);
+            }
+            for (i = 1; i <= 25; i++) { //fill 25 boxes
+                let numElm = document.createElement('p');
+                card.appendChild(numElm);
+                numElm.textContent = max;
+                numElm.textContent = Math.floor(Math.random() * max);
 
-                    numElm.addEventListener("click", crossOut);
-                }
-
-            });
-
-            function crossOut(event) {
-                let numElm = event.currentTarget;
-                numElm.classList.toggle("finished");
+                numElm.addEventListener("click", crossOut);
             }
 
+        });
+
+        function crossOut(event) {
+            let numElm = event.currentTarget;
+            numElm.classList.toggle("finished");
+        }
 
 
-        </script>
+
+    </script>
 
 </body>
 
