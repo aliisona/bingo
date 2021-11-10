@@ -6,100 +6,131 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
 
     <title>BINGO</title>
 </head>
 
 <body>
     <h1> BINGO! </h1>
-    <p> <em> Welcome to Bingo! 
-        <ul> Please select a difficulty and then generate numbers OR generate numbers without a card at all! Your selected difficulty
-        will determine how large your card number possibilities can be (If you don't select, you'll be defaulted to easy.</ul>
-        <ul>Everytime you generate a number, your  'counter' will go up!  </ul>
-        <ul>When you see the number you generated on your board, click the number to mark it! If you marked by 
-        accident, click again to unmark.</ul>
+    <p> <em> <strong> Welcome to Bingo! </em></strong>
+    <ul>
+        <li> Please select a difficulty and then generate numbers OR generate numbers without a card at all! Your
+            selected difficulty
+            will determine how large your card number possibilities can be (If you don't select, you'll be defaulted
+            to easy.</li>
+        <li>Everytime you generate a number, your 'counter' will go up! </li>
+        <li>When you see the number you generated on your board, click the number to mark it! If you marked by
+            accident, click again to unmark.</li>
 
-        <h3> Additional: </h3>
-        <ul>Don't worry, repeats ARE allowed ;)! </ul>
-        <ul>you press play again, 
-        the game will reset to that certain difficulty.  </ul> 
-        Try to win BINGO (five diagonals or five in any direction) with the lowest counter! Keep track of how low you can complete BINGO! Good luck! </em>
-    </p>
-    <div id="header">
-        <p> <strong>Difficulty</strong> </p>
-        <input type="radio" id="Easy" name="difficulty" value=25> Easy - 25 <br>
-        <input type="radio" id="Medium" name="difficulty" value=50> Medium - 50<br>
-        <input type="radio" id="Hard" name="difficulty" value=100> Hard - 100<br>
-        <button class="play"> PLAY </button>
 
-    </div>
+        <strong><em> Additional: </em> </strong>
+        <li>Don't worry, repeats ARE allowed ;)! </li>
+        <li>you press play again,
+            the game will reset to that certain difficulty. </li>
+        <li>Try to win BINGO (five diagonals or five in any direction) with the lowest counter! Keep track of how low
+            you can complete BINGO by clicking the "Add Sccore" button </li>
+    </ul>
+    <em> <strong> Good luck and BINGO! <3 </em></strong>
 
-    <div id="changing">
-        <h1>Generate Numbers: </h1>
-        <p id="listOfNum"> </p>
-        <p id="counter"> </p>
-        <button class="generate">Generate</button>
-    </div>
-    <div id="card">
+        </p>
+        <div id="header">
+            <p> <strong>Difficulty</strong> </p>
+            <input type="radio" id="Easy" name="difficulty" value=25> Easy - 25 <br>
+            <input type="radio" id="Medium" name="difficulty" value=50> Medium - 50<br>
+            <input type="radio" id="Hard" name="difficulty" value=100> Hard - 100<br>
+            <button class="play"> PLAY </button>
 
-    </div>
-    <script>
+        </div>
 
-        let card = document.querySelector("#card");
-        let difficulty = document.querySelectorAll("input");
-        let max = 25;
-        let min = 1;
+        <div id="changing">
+            <h1>Generate Numbers: </h1>
+            <p id="listOfNum"> </p>
+            <p id="counter"> </p>
+            <button class="generate">Generate</button>
+        </div>
 
-        let counts = 0;
-        let button = document.querySelector(".generate");
+        <div id="scoreBoard">
+            <h1>Past Scores</h1>
+            <ul class="scoreList"></ul>
+            <button class="score">Add my score!</button>
+        </div>
 
-        button.addEventListener("click", function () {
-            //function 1: display random number
-            document.getElementById('listOfNum').innerHTML = "Number: " + getRndInteger(max, min); 
 
-            //function 2: count how many times button clicked
-            document.getElementById('counter').innerHTML = "You have generated " + counts +" time(s).";
-            counts++;
-            
-        });
+        <div id="card">
 
-        function getRndInteger(max, min) {
-            console.log(max);
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
+        </div>
+        <script>
 
-        let play = document.querySelector(".play");
-        play.addEventListener("click", function () {
-            counts = 1; //reset counter to 1 if play is pressed again
-            document.getElementById('listOfNum').innerHTML = "N/A"; 
-            document.getElementById('counter').innerHTML = "You have not generated a number.";
-            card.innerHTML = "";
-            for (var i = 0, length = difficulty.length; i < length; i++) {
-                if (difficulty[i].checked) {
-                    max = difficulty[i].value;
-                    console.log(difficulty[i].value);
-                    break;
-                }
-            }
-            for (i = 1; i <= 25; i++) {
-                        let numElm = document.createElement('p');
-                        card.appendChild(numElm);
-                        numElm.textContent = max;
-                        numElm.textContent = Math.floor(Math.random() * max);
+            let card = document.querySelector("#card");
+            let difficulty = document.querySelectorAll("input");
+            let max = 25;
+            let min = 1;
 
-                        numElm.addEventListener("click", crossOut);
-                    }
+            let counts = 0;
+            let button = document.querySelector(".generate");
+
+            button.addEventListener("click", function () {
+                //function 1: display random number
+                document.getElementById('listOfNum').innerHTML = "Number: " + getRndInteger(max, min);
+
+                //function 2: count how many times button clicked
+                document.getElementById('counter').innerHTML = "You have generated " + counts + " time(s).";
+                counts++;
 
             });
 
-        function crossOut(event) {
-            let numElm = event.currentTarget;
-            numElm.classList.toggle("finished");
-        }
+            //generate numbers
+            function getRndInteger(max, min) {
+                console.log(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
 
+            //start game
+            let play = document.querySelector(".play");
+            play.addEventListener("click", function () {
+                counts = 1; //reset counter to 1 if play is pressed again
+                document.getElementById('listOfNum').innerHTML = "N/A";
+                document.getElementById('counter').innerHTML = "You have not generated a number.";
+                card.innerHTML = "";
+                for (var i = 0, length = difficulty.length; i < length; i++) {
+                    if (difficulty[i].checked) {
+                        max = difficulty[i].value;
+                        console.log(difficulty[i].value);
+                        break;
+                    }
+                }
+                for (i = 1; i <= 25; i++) {
+                    let numElm = document.createElement('p');
+                    card.appendChild(numElm);
+                    numElm.textContent = max;
+                    numElm.textContent = Math.floor(Math.random() * max);
 
+                    numElm.addEventListener("click", crossOut);
+                }
 
-    </script>
+            });
+
+            function crossOut(event) {
+                let numElm = event.currentTarget;
+                numElm.classList.toggle("finished");
+            }
+
+            //leaderboard
+            let addScore = document.querySelector(".score");
+            addScore.addEventListener("click", addScoreFunction);
+            // scoreBoard = document.querySelector("#scoreBoard")
+
+            function addScoreFunction() {
+                let newScore = document.createElement("li");
+                newScore.textContent = counts;
+                let scoreList = document.querySelector(".scoreList");
+                scoreList.appendChild(newScore);
+            }
+
+        </script>
 
 </body>
 
