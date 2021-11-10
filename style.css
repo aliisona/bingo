@@ -20,10 +20,12 @@ p {
 
 button {
     border-radius: 15px;
+    border-style: none;
     font-size: 14px;
     height: 20px;
     background-color: #9C6644;
     margin: 20px;
+    color: #EDE0D4;
 }
 
 #difficulty {
@@ -36,7 +38,7 @@ button {
 
 }
 
-.bingoGame {
+.bingoGame h1 {
     display: flex;
     justify-content: center;
     font-size: 70px;
@@ -56,6 +58,7 @@ button {
     width: 675px;
     height: 675px;
     margin: 10px auto;
+    align-content: center;
 }
 
 #card p {
@@ -72,7 +75,7 @@ button {
     width: 75px;
     height: 75px;
     justify-content: center;
-    align-content: center;
+    text-align: center;
     
 }
 .finished {

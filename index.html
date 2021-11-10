@@ -17,6 +17,8 @@
     <h1> BINGO! </h1>
     <p> <em> <strong> Welcome to Bingo! </em></strong>
     <ul>
+        <br>
+        <strong><em> How to Play: </em> </strong>
         <li> Please select a difficulty and then generate numbers OR generate numbers without a card at all! Your
             selected difficulty
             will determine how large your card number possibilities can be (If you don't select, you'll be defaulted
@@ -25,13 +27,23 @@
         <li>When you see the number you generated on your board, click the number to mark it! If you marked by
             accident, click again to unmark.</li>
 
-
+        <br>
         <strong><em> Additional: </em> </strong>
         <li>Don't worry, repeats ARE allowed ;)! </li>
-        <li>you press play again,
-            the game will reset to that certain difficulty. </li>
+        <li>If ou press play again, the game will reset to that certain difficulty. </li>
         <li>Try to win BINGO (five diagonals or five in any direction) with the lowest counter! Keep track of how low
-            you can complete BINGO by clicking the "Add Sccore" button </li>
+            you can complete BINGO by clicking the "Add Sccore" button. </li>
+
+        <br>
+        <strong><em> FAQ: </em> </strong>
+        <li>"Can't I just <em> cheat</em>?" Well, yes you can, but is that fun? This is a singleplayer Bingo for fun.
+            Currently, there is no anti-cheat and is going off
+            an honor system. Even if you did cheat so you got bingo before the game stops, your score gets deleted when
+            you leave, <em> filthy cheater</em>.</li>
+        <li>"Is there a prize if I win?" Other than your beautiful smile and bragging rights, <strong>no</strong>.</li>
+        <li>"Why is this game so easy/confusing?" <strong> It's Bingo. </strong></li>
+
+
     </ul>
     <em> <strong> Good luck and BINGO! <3 </em></strong>
 
@@ -57,10 +69,10 @@
         <div id="scoreBoard">
             <h1>Past Scores</h1>
             <ul class="scoreList"></ul>
-            <button class="score">Add my score!</button>
+            <button class="score">Add current score</button>
         </div>
 
-        <h1 class="bingoGame"> BINGO </h1>
+        <div class="bingoGame"> </div>
         <div id="card">
         </div>
 
@@ -71,7 +83,7 @@
             let min = 1;
 
             //generator
-            let counts = 0;
+            let counts = 1;
             let button = document.querySelector(".generateBtn");
 
             button.addEventListener("click", function () {
@@ -89,14 +101,13 @@
                 console.log(max);
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             }
-            //leaderboard
+
+            //format score
             let addScore = document.querySelector(".score");
             addScore.addEventListener("click", addScoreFunction);
-            // scoreBoard = document.querySelector("#scoreBoard")
-
             function addScoreFunction() {
                 let newScore = document.createElement("li");
-                newScore.textContent = counts;
+                newScore.textContent = counts - 1;
                 let scoreList = document.querySelector(".scoreList");
                 scoreList.appendChild(newScore);
             }
@@ -104,6 +115,7 @@
             //start game
             let card = document.querySelector("#card");
             let difficulty = document.querySelectorAll("input");
+            let title = document.querySelector(".bingoGame");
 
             let play = document.querySelector(".play");
             play.addEventListener("click", function () {
@@ -112,7 +124,9 @@
                 document.getElementById('counter').innerHTML = "You have not generated a number.";
                 card.innerHTML = "";
 
+                title.innerHTML = "<h1> BINGO </h1>";
                 card.classList.add("addCardColor");
+
                 for (var i = 0, length = difficulty.length; i < length; i++) {
                     if (difficulty[i].checked) {
                         max = difficulty[i].value;
