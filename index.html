@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+    <title>BINGO</title>
+</head>
+
+<body>
+    <h1> BINGO! </h1>
+    <p> <em> Welcome to Bingo! Please select a difficulty and then generate numbers OR generate numbers without a card at all! Your selected difficulty
+        will determine how large your card number possibilities can be (If you don't select, you'll be defaulted to easy.
+        ! Don't worry, repeats ARE allowed ;)! Everytime you generate a number, your  'counter' will go up! When you press play again, 
+        the game will reset to that certain difficulty. When you see the number you generated on your board, click the number to mark it! If you marked by 
+        accident, click again to unmark.
+        Try to win BINGO (five diagonals or five in any direction) with the lowest counter! Good luck! </em>
+    </p>
+    <div id="header">
+        <p> <strong>Difficulty</strong> </p>
+        <input type="radio" id="Easy" name="difficulty" value=25> Easy - 25 <br>
+        <input type="radio" id="Medium" name="difficulty" value=50> Medium - 50<br>
+        <input type="radio" id="Hard" name="difficulty" value=100> Hard - 100<br>
+        <button class="play"> PLAY </button>
+
+    </div>
+
+    <div id="changing">
+        <h1>Generate Numbers: </h1>
+        <p id="listOfNum"> </p>
+        <p id="counter"> </p>
+        <button class="generate">Generate</button>
+    </div>
+    <div id="card">
+
+    </div>
+    <script>
+
+        let card = document.querySelector("#card");
+        let difficulty = document.querySelectorAll("input");
+        let max = 25;
+        let min = 1;
+
+        let counts = 0;
+        let button = document.querySelector(".generate");
+
+        button.addEventListener("click", function () {
+            //function 1: display random number
+            document.getElementById('listOfNum').innerHTML = "Number: " + getRndInteger(max, min); 
+
+            //function 2: count how many times button clicked
+            document.getElementById('counter').innerHTML = "You have generated " + counts +" time(s).";
+            counts++;
+
+            
+            
+        });
+
+        function getRndInteger(max, min) {
+            console.log(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        let play = document.querySelector(".play");
+        play.addEventListener("click", function () {
+            counts = 1; //reset counter to 1 if play is pressed again
+            document.getElementById('listOfNum').innerHTML = "N/A"; 
+            document.getElementById('counter').innerHTML = "You have not generated a number.";
+            card.innerHTML = "";
+            for (var i = 0, length = difficulty.length; i < length; i++) {
+                if (difficulty[i].checked) {
+                    max = difficulty[i].value;
+                    console.log(difficulty[i].value);
+                    break;
+                }
+            }
+            for (i = 1; i <= 25; i++) {
+                        let numElm = document.createElement('p');
+                        card.appendChild(numElm);
+                        numElm.textContent = max;
+                        numElm.textContent = Math.floor(Math.random() * max);
+
+                        numElm.addEventListener("click", crossOut);
+                    }
+
+            });
+
+        function crossOut(event) {
+            let numElm = event.currentTarget;
+            numElm.classList.toggle("finished");
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
