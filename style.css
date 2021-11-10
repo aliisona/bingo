@@ -1,14 +1,13 @@
 body {
     margin: 0% 20%;
-    background-color: aquamarine;
-    font-family: monospace;
+    background-color: #EDE0D4;
+    font-family: 'Dongle', sans-serif;    
     padding: 15px 20px;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 h1 {
-    font-size: 50px;
-    background-color: pink;
+    font-size: 35px;
 }
 
 #header {
@@ -21,52 +20,79 @@ p {
 
 button {
     border-radius: 15px;
-    font-size: 24px;
-    font-family: monospace;
-    height: 50px;
-    background-color: rgb(155, 155, 197);
+    font-size: 14px;
+    height: 20px;
+    background-color: #9C6644;
     margin: 20px;
 }
+
+#difficulty {
+    font-family: monospace;
+}
+
+
+.addCardColor {
+    background-color: #E6CCB2;
+
+}
+
+.bingoGame {
+    display: flex;
+    justify-content: center;
+    font-size: 70px;
+    letter-spacing: 5px;
+    padding: 0px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
 
 #card {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 20px 20px;
     width: 675px;
     height: 675px;
-    padding: 100px;
-    
+    margin: 10px auto;
 }
+
 #card p {
     border-radius: 5px;
     gap: 10px;
     display: flex;
     border-radius: 5px;
     border: 2px;
-    border-color: blue;
+    border-color:#7F5539;
     border-style: solid;
     margin: 0;
     font-size: 24px;
     padding: 20px 20px;
     width: 75px;
     height: 75px;
-    justify-content: space-between;
-
+    justify-content: center;
+    align-content: center;
     
 }
 .finished {
-    border-color: red;
-    background: red;
-    text-decoration: line-through solid red;
+    border-color: rgb(153, 81, 81);
+    background: rgb(153, 81, 81);
+    text-decoration: line-through solid rgb(82, 38, 38);
 }
 
-#changing {
-    background-color: pink;
-    padding: 0px 200px;
+#generator {
+    background-color: #DDB892;
+    padding: 0px 150px;
 }
-#changing p{
+
+#generator p{
     font-size: 20px;
-    font-family: 'Arial Narrow', Arial, sans-serif;
 
+}
+
+#scoreBoard {
+     background-color: #DDB892;
+    padding: 0px 150px;
+    
 }

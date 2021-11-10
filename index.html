@@ -45,32 +45,34 @@
 
         </div>
 
-        <div id="changing">
+        <!-- generate numbers -->
+        <div id="generator">
             <h1>Generate Numbers: </h1>
             <p id="listOfNum"> </p>
             <p id="counter"> </p>
-            <button class="generate">Generate</button>
+            <button class="generateBtn">Generate</button>
         </div>
 
+        <!-- format scores -->
         <div id="scoreBoard">
             <h1>Past Scores</h1>
             <ul class="scoreList"></ul>
             <button class="score">Add my score!</button>
         </div>
 
-
+        <h1 class="bingoGame"> BINGO </h1>
         <div id="card">
-
         </div>
+
         <script>
 
-            let card = document.querySelector("#card");
-            let difficulty = document.querySelectorAll("input");
+
             let max = 25;
             let min = 1;
 
+            //generator
             let counts = 0;
-            let button = document.querySelector(".generate");
+            let button = document.querySelector(".generateBtn");
 
             button.addEventListener("click", function () {
                 //function 1: display random number
@@ -87,14 +89,30 @@
                 console.log(max);
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             }
+            //leaderboard
+            let addScore = document.querySelector(".score");
+            addScore.addEventListener("click", addScoreFunction);
+            // scoreBoard = document.querySelector("#scoreBoard")
+
+            function addScoreFunction() {
+                let newScore = document.createElement("li");
+                newScore.textContent = counts;
+                let scoreList = document.querySelector(".scoreList");
+                scoreList.appendChild(newScore);
+            }
 
             //start game
+            let card = document.querySelector("#card");
+            let difficulty = document.querySelectorAll("input");
+
             let play = document.querySelector(".play");
             play.addEventListener("click", function () {
                 counts = 1; //reset counter to 1 if play is pressed again
                 document.getElementById('listOfNum').innerHTML = "N/A";
                 document.getElementById('counter').innerHTML = "You have not generated a number.";
                 card.innerHTML = "";
+
+                card.classList.add("addCardColor");
                 for (var i = 0, length = difficulty.length; i < length; i++) {
                     if (difficulty[i].checked) {
                         max = difficulty[i].value;
@@ -118,17 +136,7 @@
                 numElm.classList.toggle("finished");
             }
 
-            //leaderboard
-            let addScore = document.querySelector(".score");
-            addScore.addEventListener("click", addScoreFunction);
-            // scoreBoard = document.querySelector("#scoreBoard")
 
-            function addScoreFunction() {
-                let newScore = document.createElement("li");
-                newScore.textContent = counts;
-                let scoreList = document.querySelector(".scoreList");
-                scoreList.appendChild(newScore);
-            }
 
         </script>
 
